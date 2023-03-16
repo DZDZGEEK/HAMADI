@@ -1,0 +1,66 @@
+1 Using the built-in qsort() function:
+
+int cmpfunc(const void * a, const void * b) {
+   return (*(int*)b - *(int*)a);
+}
+
+void sort_array_descend(int arr[], int n) {
+   qsort(arr, n, sizeof(int), cmpfunc);
+}
+
+2 Using a simple bubble sort algorithm:
+
+void sort_array_descend(int arr[], int n) {
+   int i, j, temp;
+   for (i = 0; i < n-1; i++) {
+      for (j = 0; j < n-i-1; j++) {
+         if (arr[j] < arr[j+1]) {
+            temp = arr[j];
+            arr[j] = arr[j+1];
+            arr[j+1] = temp;
+         }
+      }
+   }
+}
+
+
+3 Using a selection sort algorithm:
+
+void sort_array_descend(int arr[], int n) {
+   int i, j, min_idx;
+   for (i = 0; i < n-1; i++) {
+      min_idx = i;
+      for (j = i+1; j < n; j++) {
+         if (arr[j] > arr[min_idx]) {
+            min_idx = j;
+         }
+      }
+      int temp = arr[i];
+      arr[i] = arr[min_idx];
+      arr[min_idx] = temp;
+   }
+}
+
+
+4 Using a merge sort algorithm:
+
+void merge(int arr[], int l, int m, int r) {
+   int i, j, k;
+   int n1 = m - l + 1;
+   int n2 =  r - m;
+
+   int L[n1], R[n2];
+
+   for (i = 0; i < n1; i++)
+      L[i] = arr[l + i];
+   for (j = 0; j < n2; j++)
+      R[j] = arr[m + 1+ j];
+
+   i = 0;
+   j = 0;
+   k = l;
+   while (i < n1 && j < n2) {
+      if (L[i] >= R[j]) {
+         arr[k] = L[i];
+         i++;
+
